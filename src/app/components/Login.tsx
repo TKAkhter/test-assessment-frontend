@@ -56,6 +56,7 @@ const Login: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleLogin}>Login</button>
+      <button onClick={() => history.push("/create-user")}>Create User</button>
     </div>
   );
 };
