@@ -1,27 +1,39 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AuthState } from "../types";
 
-export interface AuthState {
-  token: string | null;
-}
+const storedToken = localStorage.getItem("token");
+const storedUserName = localStorage.getItem("username");
+const storedUserId = localStorage.getItem("userId");
 
 const initialState: AuthState = {
-  token: localStorage.getItem("token") || null,
+  token: storedToken ? storedToken : null,
+  userId: storedUserId ? storedUserId : null,
+  username: storedUserName ? storedUserName : null,
 };
 
-const authSlice = createSlice({
-  name: "auth",
-  initialState,
-  reducers: {
-    setToken(state, action: PayloadAction<string>) {
-      state.token = action.payload;
-      localStorage.setItem("token", action.payload);
-    },
-    clearToken(state) {
-      state.token = null;
+const authReducer = (state = initialState, action: any) => {
+  switch (action.type) {
+    case "LOGIN_SUCCESS":
+      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem("userId", action.payload.userId);
+      localStorage.setItem("username", action.payload.username);
+      return {
+        ...state,
+        token: action.payload.token,
+        userId: action.payload.userId,
+        username: action.payload.username,
+      };
+    case "CLEAR_TOKEN": {
       localStorage.removeItem("token");
-    },
-  },
-});
+      localStorage.removeItem("userId");
+      localStorage.removeItem("username");
+      return {
+        ...state,
+        token: null,
+      };
+    }
+    default:
+      return state;
+  }
+};
 
-export const { setToken, clearToken } = authSlice.actions;
-export default authSlice.reducer;
+export default authReducer;

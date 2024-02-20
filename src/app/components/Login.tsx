@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setToken } from "../redux/reducer";
 import axios from "axios";
-import { StoreRootState } from "../types";
+import { JwtUserPayload, StoreRootState } from "../types";
 import { useHistory } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const token = useSelector((state: StoreRootState) => state.auth.token);
-  console.log("🚀 ~ token:", token);
+  const token = useSelector((state: StoreRootState) => state.user.token);
 
   const handleLogin = async () => {
     try {
-      // Call your backend API to authenticate the user and obtain a token
       const response = await axios.post(`${process.env.REACT_APP_APP_URL}/api/login`, {
         username,
         password,
       });
-      const token = response.data.token; // Adjust this based on your backend response
+      const token = response.data.token;
+      const decoded: JwtUserPayload = jwtDecode(token);
 
-      // Save the token using Redux
-      dispatch(setToken(token));
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          token: token,
+          username: decoded.username,
+          userId: decoded.userId,
+        },
+      });
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -31,7 +36,6 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     if (token) {
-      // Redirect to dashboard if token exists
       history.push("/dashboard");
     }
   }, [token, history]);
