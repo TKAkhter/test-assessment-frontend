@@ -1,8 +1,23 @@
 import { JwtPayload } from "jwt-decode";
+
+export interface Episode {
+  title: string;
+  watched: boolean;
+  _id: string;
+}
+
+export interface Show {
+  _id: string;
+  title: string;
+  episodes: Episode[];
+  userId: string;
+  __v: number;
+}
 export interface AuthState {
   token: string | null;
   userId: string | null;
   username: string | null;
+  shows: Show[] | [];
 }
 export interface StoreRootState {
   user: AuthState;

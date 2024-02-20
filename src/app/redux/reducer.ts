@@ -8,6 +8,7 @@ const initialState: AuthState = {
   token: storedToken ? storedToken : null,
   userId: storedUserId ? storedUserId : null,
   username: storedUserName ? storedUserName : null,
+  shows: [],
 };
 
 const authReducer = (state = initialState, action: any) => {
@@ -29,6 +30,18 @@ const authReducer = (state = initialState, action: any) => {
       return {
         ...state,
         token: null,
+      };
+    }
+    case "ADD_SHOW": {
+      return {
+        ...state,
+        shows: [...state.shows, action.payload],
+      };
+    }
+    case "SHOW_LIST": {
+      return {
+        ...state,
+        shows: action.payload,
       };
     }
     default:
