@@ -1,22 +1,32 @@
 import React from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { StoreRootState } from "../types";
 
-const RemoveShow: React.FC = () => {
+interface RemoveShowProps {
+  showId: string;
+}
+
+const RemoveShow: React.FC<RemoveShowProps> = ({ showId }) => {
+  const userId = useSelector((state: StoreRootState) => state.user.userId);
+  const dispatch = useDispatch();
+
   const handleRemoveShow = async (id: string) => {
     try {
-      await axios.delete(`/api/removeshow/${id}`);
+      const { data } = await axios.delete(
+        `${process.env.REACT_APP_APP_URL}/api/removeshow/${userId}/${id}`,
+      );
+      dispatch({
+        type: "UPDATE_LIST",
+        payload: data.shows,
+      });
       console.log("Show removed successfully");
     } catch (error) {
       console.error("Failed to remove show:", error);
     }
   };
 
-  return (
-    <div>
-      <h1>Remove Show</h1>
-      <button onClick={() => handleRemoveShow("show_id")}>Remove Show</button>
-    </div>
-  );
+  return <button onClick={() => handleRemoveShow(showId)}>Remove Show</button>;
 };
 
 export default RemoveShow;

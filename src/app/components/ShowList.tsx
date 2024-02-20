@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreRootState } from "../types";
+import RemoveShow from "./RemoveShow";
+import ToggleMarkWatched from "./ToggleMarkWatched";
 
 function ShowList() {
   const dispatch = useDispatch();
@@ -36,11 +38,17 @@ function ShowList() {
               <>
                 <li key={show._id} id={show._id}>
                   {show.title}
+                  <RemoveShow showId={show._id} />
                 </li>
                 <ul>
-                  {show.episodes.map((episode) => (
+                  {show.episodes.map((episode, index) => (
                     <li key={episode._id}>
                       {episode.title}, Watched = {episode.watched ? "Yes" : "No"}
+                      <ToggleMarkWatched
+                        showId={show._id}
+                        episodeIndex={index}
+                        watch={episode.watched}
+                      />
                     </li>
                   ))}
                 </ul>

@@ -44,6 +44,12 @@ const authReducer = (state = initialState, action: any) => {
         shows: action.payload,
       };
     }
+    case "UPDATE_LIST": {
+      return {
+        ...state,
+        shows: action.payload,
+      };
+    }
     default:
       return state;
   }

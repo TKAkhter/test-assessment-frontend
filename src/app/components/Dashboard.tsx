@@ -3,8 +3,6 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ShowList from "./ShowList";
 import AddShow from "./AddShow";
-import RemoveShow from "./RemoveShow";
-import ToggleMarkWatched from "./ToggleMarkWatched";
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -22,8 +20,6 @@ const Dashboard: React.FC = () => {
       <h1>Dashboard</h1>
       <ShowList />
       <AddShow />
-      <RemoveShow />
-      <ToggleMarkWatched />
       <button onClick={handleLogout}>Logout</button>
     </div>
   );
