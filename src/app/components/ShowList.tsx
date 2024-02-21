@@ -16,6 +16,7 @@ function ShowList() {
             userId: user.userId,
           },
         });
+        console.log("🚀 ~ fetchShowList ~ data:", data);
         dispatch({
           type: "SHOW_LIST",
           payload: data.shows,
@@ -26,7 +27,7 @@ function ShowList() {
     }
 
     fetchShowList();
-  }, [user.userId]);
+  }, [user.userId, dispatch]);
 
   return (
     <div className="container mx-auto mb-10">

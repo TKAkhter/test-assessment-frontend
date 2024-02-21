@@ -21,7 +21,6 @@ const EpisodeList: React.FC<EpisodeProps> = ({ episodes, showId }) => {
     rows: 1,
   };
 
-  console.log("🚀 ~ episodes:", episodes);
   return (
     <div className="flex gap-4 flex-wrap">
       {episodes && episodes.length > 0 ? (
