@@ -4,6 +4,11 @@ export interface Episode {
   title: string;
   watched: boolean;
   _id: string;
+  season?: number;
+  episode?: number;
+  imdburl?: string;
+  plot?: string;
+  poster?: string;
 }
 
 export interface Show {
@@ -12,6 +17,12 @@ export interface Show {
   episodes: Episode[];
   userId: string;
   __v: number;
+  year?: string;
+  genre?: string;
+  plot?: string;
+  poster?: string;
+  imdburl?: string;
+  totalSeasons?: number;
 }
 export interface AuthState {
   token: string | null;

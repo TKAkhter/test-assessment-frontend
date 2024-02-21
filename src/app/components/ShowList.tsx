@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { StoreRootState } from "../types";
-import RemoveShow from "./RemoveShow";
-import ToggleMarkWatched from "./ToggleMarkWatched";
+import ShowCard from "./ShowCard";
 
 function ShowList() {
   const dispatch = useDispatch();
@@ -12,7 +11,7 @@ function ShowList() {
   useEffect(() => {
     async function fetchShowList() {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_APP_URL}/api/showlist`, {
+        const { data } = await axios.get(`http://localhost:8080/api/showlist`, {
           params: {
             userId: user.userId,
           },
@@ -30,32 +29,15 @@ function ShowList() {
   }, [user.userId]);
 
   return (
-    <div>
-      <h2>Show List</h2>
-      <ul>
-        {user.shows
-          ? user.shows.map((show) => (
-              <>
-                <li key={show._id} id={show._id}>
-                  {show.title}
-                  <RemoveShow showId={show._id} />
-                </li>
-                <ul>
-                  {show.episodes.map((episode, index) => (
-                    <li key={episode._id}>
-                      {episode.title}, Watched = {episode.watched ? "Yes" : "No"}
-                      <ToggleMarkWatched
-                        showId={show._id}
-                        episodeIndex={index}
-                        watch={episode.watched}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </>
-            ))
-          : null}
-      </ul>
+    <div className="container mx-auto mb-10">
+      <main className="px-5">
+        <h3 className="text-4xl font-bold my-8">My Shows</h3>
+        <div className="flex gap-32 justify-between flex-wrap">
+          {user.shows
+            ? user.shows.map((show, index) => <ShowCard key={show._id} {...show} />)
+            : null}
+        </div>
+      </main>
     </div>
   );
 }
