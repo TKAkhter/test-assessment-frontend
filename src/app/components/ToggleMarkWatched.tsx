@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { StoreRootState } from "../types";
 import { LoadingAnimation } from "./loadingAnimation";
+import { toast } from "react-toastify";
 
 interface ToggleShowMarkedWatchedProps {
   showId: string;
@@ -31,9 +32,11 @@ const ToggleMarkWatched: React.FC<ToggleShowMarkedWatchedProps> = ({
         payload: data.shows,
       });
       setIsLoading(false);
+      toast.success(`Episode marked as ${watched ? "watched" : "un-watched"}`);
       console.log(`Episode marked as ${watched ? "watched" : "un-watched"}`);
     } catch (error) {
       console.error("Failed to toggle episode watched status:", error);
+      toast.error("Show can not be marked!");
     }
   };
 

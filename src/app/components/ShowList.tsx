@@ -11,7 +11,7 @@ function ShowList() {
   useEffect(() => {
     async function fetchShowList() {
       try {
-        const { data } = await axios.get(`http://localhost:8080/api/showlist`, {
+        const { data } = await axios.get(`${process.env.REACT_APP_APP_URL}/api/showlist`, {
           params: {
             userId: user.userId,
           },

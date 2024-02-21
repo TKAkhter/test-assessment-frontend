@@ -14,7 +14,7 @@ const NavBar = () => {
   };
 
   return (
-    <header className="flex justify-between items-center p-5">
+    <header className="container mx-auto flex justify-between items-center p-5">
       <div className="text-3xl font-bold">
         <img className="w-[150px]" src={Logo} alt="Banner" />
       </div>
