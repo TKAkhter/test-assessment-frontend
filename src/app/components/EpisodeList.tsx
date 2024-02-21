@@ -1,6 +1,5 @@
 import { Episode } from "../types";
 import EpisodeCard from "./EpisodeCard";
-import ToggleMarkWatched from "./ToggleMarkWatched";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";

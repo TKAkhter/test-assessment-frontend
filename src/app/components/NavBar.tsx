@@ -19,16 +19,16 @@ const NavBar = () => {
         <img className="w-[150px]" src={Logo} alt="Banner" />
       </div>
       <nav className="flex gap-8">
-        <a href="#" className="text-lg hover:text-gray-300">
+        <a href="!#" className="text-lg hover:text-gray-300">
           Movies
         </a>
-        <a href="#" className="text-lg hover:text-gray-300">
+        <a href="!#" className="text-lg hover:text-gray-300">
           TV Shows
         </a>
-        <a href="#" className="text-lg hover:text-gray-300">
+        <a href="!#" className="text-lg hover:text-gray-300">
           Series
         </a>
-        <a href="#" className="text-lg hover:text-gray-300">
+        <a href="!#" className="text-lg hover:text-gray-300">
           More
         </a>
       </nav>

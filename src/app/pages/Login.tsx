@@ -84,7 +84,7 @@ const Login: React.FC = () => {
                         >
                           Log in
                         </button>
-                        <a href="#">Forgot password?</a>
+                        <a href="!#">Forgot password?</a>
                       </div>
 
                       <div className="flex items-center justify-between pb-6">
